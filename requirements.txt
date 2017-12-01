@@ -1,6 +1,6 @@
-tweepy
-pandas
-numpy
-matplotlib
-seaborn
-vaderSentiment
+tweepy==3.5.0
+pandas==0.20.3
+numpy==1.13.1
+matplotlib==2.0.2
+seaborn==0.8
+vaderSentiment==2.5
