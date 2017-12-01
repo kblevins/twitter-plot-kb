@@ -10,9 +10,6 @@ import seaborn as sns
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
-# import twitter api keys
-from plot_kb_config import api_key, api_sec, token, token_sec
-
 # Setup Tweepy API Authentication
 auth = tweepy.OAuthHandler(api_key, api_sec)
 auth.set_access_token(token, token_sec)
