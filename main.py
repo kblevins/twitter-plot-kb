@@ -109,7 +109,7 @@ last_id = my_tweets[0]['id']
 # every 5 minutes, scan for new mentions & update with plots
 while True:
     
-    print(f"starting analysis {i} at {datetime.strftime(datetime.now(),'%d-%m-%Y %H:%M:%S')}")
+    print(f"starting analysis at {datetime.strftime(datetime.now(),'%d-%m-%Y %H:%M:%S')}")
     
     new = new_ids(last_id)
     
