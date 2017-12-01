@@ -10,6 +10,11 @@ import seaborn as sns
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 analyzer = SentimentIntensityAnalyzer()
 
+api_key = os.getenv('api_key')
+api_sec = os.getenv('api_sec')
+token = os.getenv('token')
+token_sec = os.getenv('token_sec')
+
 # Setup Tweepy API Authentication
 auth = tweepy.OAuthHandler(api_key, api_sec)
 auth.set_access_token(token, token_sec)
