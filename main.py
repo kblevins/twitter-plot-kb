@@ -105,8 +105,7 @@ my_tweets = api.user_timeline('plot_kb', count = 100)
 last_id = my_tweets[0]['id']
 
 # every 5 minutes, scan for new mentions & update with plots
-t_end = time.time() + 60 * 5
-while(time.time() < t_end):
+while True:
     
     print(f"starting analysis {i} at {datetime.strftime(datetime.now(),'%d-%m-%Y %H:%M:%S')}")
     
