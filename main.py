@@ -4,6 +4,7 @@ import time
 import tweepy
 import pandas as pd
 import numpy as np
+matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 from datetime import datetime
 import seaborn as sns
