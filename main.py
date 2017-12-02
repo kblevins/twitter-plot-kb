@@ -90,7 +90,7 @@ def tweet_sentiment(target_user, attribution):
         plt.title(f"Sentiment Analysis of @{target_user} Tweets ({current_date})")
 
         # save the plot to a file
-        filename = f"plots\\{target_user}_{datetime.strftime(datetime.now(),'%Y%m%d%H%M%S')}.png"
+        filename = temp.png
         plt.savefig(filename, bbox_extra_artists=(lgd,), bbox_inches='tight', dpi = 300)
         plt.close()
         
@@ -99,7 +99,7 @@ def tweet_sentiment(target_user, attribution):
         avg_score = ""
         
         # tweet out the plot
-        api.update_with_media(os.path.join('C:\\Users\\Kali\\repo\\twitter-plot-kb\\', filename),
+        api.update_with_media(filename,
                               f"Tweet sentiment analysis for @{target_user} as requested by @{attribution}")
     except:
         api.update_status(f"@{attribution} sorry, there was an error with the analysis of @{target_user}. I'll look into it and try to let you know why.")
