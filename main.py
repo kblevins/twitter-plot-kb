@@ -90,7 +90,7 @@ def tweet_sentiment(target_user, attribution):
         plt.title(f"Sentiment Analysis of @{target_user} Tweets ({current_date})")
 
         # save the plot to a file
-        filename = temp.png
+        filename = 'temp.png'
         plt.savefig(filename, bbox_extra_artists=(lgd,), bbox_inches='tight', dpi = 300)
         plt.close()
         
@@ -105,43 +105,52 @@ def tweet_sentiment(target_user, attribution):
         api.update_status(f"@{attribution} sorry, there was an error with the analysis of @{target_user}. I'll look into it and try to let you know why.")
 
 
-my_tweets = api.user_timeline('plot_kb', count = 100)
-last_id = my_tweets[0]['id']
-
 # every 5 minutes, scan for new mentions & update with plots
 while True:
     
     print(f"starting analysis at {datetime.strftime(datetime.now(),'%d-%m-%Y %H:%M:%S')}")
     
+    # get id for last tweet issued from account
+    my_tweets = api.user_timeline('plot_kb', count = 100)
+    last_id = my_tweets[0]['id']
+
+    # run new_ids to see if there are new plot requests since the last tweet
     new = new_ids(last_id)
     
+    # if there are new tweets, new will be a dictionary, so....
     if type(new) == dict:
         
+        # make a dataframe out of it
         df = pd.DataFrame(new)
             
+        # create an empty list to populate with the recently analyzed accounts
+        # so we don't re-analyze them too often    
         recently_analyzed = []
-        
-        my_tweets = api.user_timeline('plot_kb', count = 100)
+
         print('analyzing previous tweets')
         for tweet in my_tweets:
             try:
+                # grab the screen name for accounts that have been analyzed recently
                 user = tweet['entities']['user_mentions'][0]['screen_name']
+                # add them to the recently_analyzed list
                 recently_analyzed.append(user)
             except IndexError:
                 print('1 tweet has no mentions')
         print('finished analyzing previous tweets')
         
+        # for each of the mentions in the new mentions...
         for index, row in df.iterrows():
+            # if the account hasn't been analyzed recently
             if row['to_plot'] not in recently_analyzed:
                 print(f"analyzing {row['to_plot']}")
+                # run the tweet_sentiment function on the account requested
                 tweet_sentiment(row['to_plot'], row['to_attribute'])
+                # add that account to the recently_analyzed list
                 recently_analyzed.append(row['to_plot'])
                 print(f"finished analyzing {row['to_plot']}")
             else:
                 print(f"{row['to_plot']} was already analyzed recently, skipping")
         
-        my_tweets = api.user_timeline('plot_kb', count = 100)
-        last_id = my_tweets[0]['id']
         print('Done analyzing new tweets. Going to sleep for 5 minutes. Zzzzz....\n')
         time.sleep(300)
     else:
