@@ -1,4 +1,6 @@
 # twitter-plot-kb
+![robot](robot.jpg)
+
 A twitter bot for sentiment analysis. The twitter screen name for the bot is '@plot_kb'. If you tweet a message at this bot containing a twitter screen name it will return a plot with the sentiment scores from that user's last 500 tweets. 
 
 Contents of this repo:
